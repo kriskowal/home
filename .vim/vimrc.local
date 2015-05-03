@@ -1,0 +1,12 @@
+" For local terminals (as opposed to over ssh)
+set mouse=a
+set term=xterm-256color
+color khazad256
+" this makes it use the system clipboard
+" whenever yanking to the "unnamed" register.
+set clipboard=unnamed
+set ttyfast
+set autoindent
+set showmode
+set showcmd
+set visualbell

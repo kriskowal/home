@@ -2,3 +2,6 @@
 !.gitignore
 !.bashrc
 !.bash_profile
+!.vim
+!.vimrc
+!.vimrc.local
