@@ -5,9 +5,7 @@
 shopt -s checkwinsize
 
 PSCOLOR=$(if [ "$USER" == "root" ]; then echo -n 31; else echo -n 33; fi)
-
 PS1=\
-'${debian_chroot:+($debian_chroot)}'\
 '\[\033[01;32m\]'\
 '\u@\h'\
 '\[\033[00m\]'\
@@ -17,35 +15,51 @@ PS1=\
 '\[\033[00m\]'\
 " \[\033[1;${PSCOLOR}m\]❯❯\[\033[00;37m\] "
 
+bind '"\e[A"':history-search-backward
+bind '"\e[B"':history-search-forward
+
+export EDITOR=vim
+export PAGER=less
+export LESS="-SMRci"
+
+export GOPATH="${HOME}"/golang
+export CPLUS_INCLUDE_PATH="/usr/local/include:${CPLUS_INCLUDE_PATH}"
+export PATH=\
+/sbin:\
+/bin:\
+/usr/sbin:\
+/usr/bin:\
+/usr/local/sbin:\
+/usr/local/bin:\
+/Developer/usr/bin:\
+${HOME}/bin:\
+${GOPATH}/bin
+
 # git bash completion
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     source /usr/local/etc/bash_completion.d/git-completion.bash
 fi
+if [ -f /usr/local/share/git-core/git-completion.bash ]; then
+    source /usr/local/share/git-core/git-completion.bash
+fi
 
-bind '"\e[A"':history-search-backward
-bind '"\e[B"':history-search-forward
-
-export PATH=\
-${HOME}/bin:\
-/usr/local/sbin:\
-/usr/local/bin:\
-/usr/sbin:\
-/usr/bin:\
-/sbin:\
-/bin:\
-/Developer/usr/bin
-
-export PAGER=less
-export EDITOR=vim
-
-# add user bin dir
-if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
+# brew completion
+if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    source "$(brew --prefix)/etc/bash_completion"
 fi
 
 # added by travis gem
-[ -f /Users/kris/.travis/travis.sh ] && source /Users/kris/.travis/travis.sh
+if [ -f "$HOME"/.travis/travis.sh ]; then
+    source "$HOME"/.travis/travis.sh
+fi
 
 # added by nvm
-export NVM_DIR="/Users/kris/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+fi
+
+# local overrides
+if [ -f "$HOME"/.bashrc.local ]; then
+    source "$HOME"/.bashrc.local
+fi

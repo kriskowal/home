@@ -10,21 +10,50 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'tpope/vim-commentary' " :help commentary gc gcgc
-Plugin 'tpope/vim-surround' " :help surround
-Plugin 'tpope/vim-unimpaired' " :help unimpaired
-Plugin 'tpope/vim-fugitive' " :help fugitive
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-scriptease'
-Plugin 'tpope/vim-speeddating' " ^A ^D on dates, e.g., Oct 10, 1981
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+" Plugin 'user/L9', {'name': 'newL9'}
+
+" Tools (sorted)
+Plugin 'godlygeek/tabular'    " :Tabularize motion
 Plugin 'groenewege/vim-less'
-Plugin 'alunny/pegjs-vim'
 Plugin 'mattn/gist-vim' " :Gist
+Plugin 'tpope/vim-commentary' " gc(motion, gc to undo)
+Plugin 'tpope/vim-fugitive' " :Gedit :Gsplit :Gvsplit :Gdiff
+Plugin 'tpope/vim-repeat' " makes . repeat plugin commands defined by tpope
+Plugin 'tpope/vim-scriptease'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-speeddating' " ^A ^D on dates, e.g., Oct 10, 1981
+Plugin 'tpope/vim-surround' " cs old quote new quote
+Plugin 'tpope/vim-unimpaired' " :help unimpaired
+Plugin 'tpope/vim-vinegar' " - up, . command ! command ~ home cg cl to cd or lcd
+
+" File types
+Plugin 'alunny/pegjs-vim'
+Plugin 'elzr/vim-json'
+Plugin 'othree/html5.vim'
+Plugin 'solarnz/thrift.vim'
+
+" Color schemes
+Plugin 'baycomb'
+Plugin 'w0ng/vim-hybrid'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()         " required
+" load the plugin and indent settings for the detected filetype
+filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -37,46 +66,56 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" Regarding the HUD
 let mapleader=";"
 set number
 set ruler
+set scrolloff=3
+set laststatus=2
+set mouse=a
 syntax on
 
-" Whitespace
-set nowrap
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+" Regarding space
+set autoindent
 set expandtab
-"set list listchars=tab:\ \ ,trail:·
+set nowrap
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+filetype indent on
+" Makefile, respect tabs
+au FileType make set noexpandtab
+" Python, follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
+au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " Searching
-set hlsearch
 set incsearch
+set hlsearch
 "set ignorecase
 "set smartcase
+" % to bounce from do to end etc.
+runtime! macros/matchit.vim
 
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 
-" Status bar
-set laststatus=2
+" Color
+set background=dark
+colorscheme hybrid " from vim-hybrid
 
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
+" Backups
+set noswapfile
+" Alternately,
+" Directories for swp files
+" set backupdir=~/.vim/backup
+" set directory=~/.vim/backup
+" Make uses real tabs
 
-" Command-T configuration
-let g:CommandTMaxHeight=20
-
-" ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
-
-" CTags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
-map <C-\> :tnext<CR>
+" fugitive:
+" set statusline=%{fugitive#statusline()}
 
 " Remember last location in file
 if has("autocmd")
@@ -84,105 +123,11 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
-function s:setupWrapping()
-  set wrap
-  set lbr
-  set wrapmargin=2
-  set textwidth=80
-endfunction
-
-function s:setupMarkup()
-  call s:setupWrapping()
-  map <buffer> <Leader>p :Mm <CR>
-endfunction
-
-" make uses real tabs
-au FileType make set noexpandtab
-
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-
-" add json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
-
-au BufRead,BufNewFile *.txt call s:setupWrapping()
-
-au BufRead,BufNewFile *.pegjs set ft=pegjs
-
-" make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-au FileType js set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
-map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-" Unimpaired configuration
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-" let g:syntastic_quiet_warnings=1 FIXME
-
-" gist-vim defaults
-if has("mac")
-  let g:gist_clip_command = 'pbcopy'
-elseif has("unix")
-  let g:gist_clip_command = 'xclip -selection clipboard'
-endif
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-
 " Use modeline overrides
 set modeline
 set modelines=10
-
-" Default color scheme
-color desert
-
-" Directories for swp files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
-
-" Turn off jslint errors by default
-let g:JSLintHighlightErrorLine = 0
-
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
-
-" % to bounce from do to end etc.
-runtime! macros/matchit.vim
-
-" Show (partial) command in the status line
-set showcmd
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-
-" Remove trailing space
-autocmd BufWritePre *.js :%s/\s\+$//e
-autocmd BufWritePre *.tmpl :%s/\s\+$//e
