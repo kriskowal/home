@@ -27,10 +27,10 @@ export CPLUS_INCLUDE_PATH="/usr/local/include:${CPLUS_INCLUDE_PATH}"
 export PATH=\
 /sbin:\
 /bin:\
-/usr/sbin:\
-/usr/bin:\
 /usr/local/sbin:\
 /usr/local/bin:\
+/usr/sbin:\
+/usr/bin:\
 /Developer/usr/bin:\
 ${HOME}/bin:\
 ${GOPATH}/bin
