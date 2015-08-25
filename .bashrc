@@ -15,6 +15,21 @@ PS1=\
 '\[\033[00m\]'\
 " \[\033[1;${PSCOLOR}m\]❯❯\[\033[00;37m\] "
 
+function ran() {
+    man -k . | awk '
+        BEGIN {srand()}
+        {
+            cur = substr($1, 0, index($1, "(")-1);
+            score = rand();
+            if (score > last_score) {
+                last_score = score;
+                last = cur;
+            }
+        }
+        END {print last}
+    ' | xargs man
+}
+
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
