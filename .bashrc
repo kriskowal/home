@@ -37,7 +37,7 @@ export EDITOR=vim
 export PAGER=less
 export LESS="-SMRci"
 
-export GOPATH="${HOME}"/golang
+export GOPATH="${HOME}"/gocode
 export CPLUS_INCLUDE_PATH="/usr/local/include:${CPLUS_INCLUDE_PATH}"
 export PATH=\
 /sbin:\
