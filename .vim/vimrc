@@ -40,13 +40,18 @@ Plugin 'tpope/vim-surround' " cs old quote new quote
 Plugin 'tpope/vim-unimpaired' " :help unimpaired
 Plugin 'tpope/vim-vinegar' " - up, . command ! command ~ home cg cl to cd or lcd
 
-" File types
+" Neovim plugins
+Plugin 'Shougo/deoplete.nvim' " tab completion
+Plugin 'ervandew/supertab' " to use tab for tab completion
+
+" Language modes
 Plugin 'alunny/pegjs-vim'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'othree/html5.vim'
 Plugin 'solarnz/thrift.vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'zchee/deoplete-go'
 
 " Color schemes
 Plugin 'baycomb'
