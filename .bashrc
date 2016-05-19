@@ -4,6 +4,12 @@
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+alias files='cut -d: -f1 | uniq'
+
+function tnjq {
+    jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq $@
+}
+
 PSCOLOR=$(if [ "$USER" == "root" ]; then echo -n 31; else echo -n 33; fi)
 PS1=\
 '\[\033[01;32m\]'\
