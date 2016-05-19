@@ -67,8 +67,7 @@ fi
 # git bash completion
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     source /usr/local/etc/bash_completion.d/git-completion.bash
-fi
-if [ -f /usr/local/share/git-core/git-completion.bash ]; then
+elif [ -f /usr/local/share/git-core/git-completion.bash ]; then
     source /usr/local/share/git-core/git-completion.bash
 fi
 
