@@ -60,6 +60,10 @@ export PATH=\
 ${HOME}/bin:\
 ${GOPATH}/bin
 
+if [ -e /Applications/Inkscape.app/Contents/Resources/bin ]; then
+    export PATH=$PATH:/Applications/Inkscape.app/Contents/Resources/bin
+fi
+
 # git bash completion
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     source /usr/local/etc/bash_completion.d/git-completion.bash
