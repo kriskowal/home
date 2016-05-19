@@ -91,3 +91,7 @@ fi
 if [ -f "$HOME"/.bashrc.local ]; then
     source "$HOME"/.bashrc.local
 fi
+
+if which nvim > /dev/null; then
+    alias vim='nvim'
+fi

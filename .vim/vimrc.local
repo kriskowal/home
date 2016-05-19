@@ -1,6 +1,8 @@
 " For local terminals (as opposed to over ssh)
 set mouse=a
-set term=xterm-256color
+if !has("nvim")
+    set term=xterm-256color
+endif
 " color khazad256
 colorscheme hybrid " from vim-hybrid
 " this makes it use the system clipboard
