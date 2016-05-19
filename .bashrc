@@ -21,6 +21,10 @@ PS1=\
 '\[\033[00m\]'\
 " \[\033[1;${PSCOLOR}m\]❯❯\[\033[00;37m\] "
 
+if [ "$PRESO" ]; then
+    PS1='\[\033[01;34m\]''\w '"\[\033[1;${PSCOLOR}m\]❯❯\[\033[00;37m\] "
+fi
+
 function ran() {
     man -k . | awk '
         BEGIN {srand()}
