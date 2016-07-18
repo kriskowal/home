@@ -5,6 +5,9 @@
 shopt -s checkwinsize
 
 alias files='cut -d: -f1 | uniq'
+alias d='docker'
+alias dc='docker-compose'
+alias dm='docker-machine'
 
 function tnjq {
     jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq $@
@@ -58,7 +61,9 @@ export PATH=\
 /usr/bin:\
 /Developer/usr/bin:\
 ${HOME}/bin:\
-${GOPATH}/bin
+${HOME}/FlameGraph:\
+${GOPATH}/bin:\
+/usr/local/opt/go/libexec/bin
 
 if [ -e /Applications/Inkscape.app/Contents/Resources/bin ]; then
     export PATH=$PATH:/Applications/Inkscape.app/Contents/Resources/bin
@@ -92,9 +97,9 @@ if [ -f "$HOME"/.bashrc.local ]; then
     source "$HOME"/.bashrc.local
 fi
 
-if which nvim > /dev/null; then
-    alias vim='nvim'
-fi
+# if which nvim > /dev/null; then
+#     alias vim='nvim'
+# fi
 
 # fasd
 if which fasd > /dev/null; then
@@ -105,3 +110,5 @@ if which fasd > /dev/null; then
     source "$fasd_cache"
     unset fasd_cache
 fi
+
+export GO15VENDOREXPERIMENT=1

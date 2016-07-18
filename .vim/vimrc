@@ -39,10 +39,13 @@ Plugin 'tpope/vim-speeddating' " ^A ^D on dates, e.g., Oct 10, 1981
 Plugin 'tpope/vim-surround' " cs old quote new quote
 Plugin 'tpope/vim-unimpaired' " :help unimpaired
 Plugin 'tpope/vim-vinegar' " - up, . command ! command ~ home cg cl to cd or lcd
+Plugin 'scrooloose/syntastic'
 
 " Neovim plugins
-Plugin 'Shougo/deoplete.nvim' " tab completion
-Plugin 'ervandew/supertab' " to use tab for tab completion
+if has("nvim")
+    Plugin 'Shougo/deoplete.nvim' " tab completion
+    Plugin 'ervandew/supertab' " to use tab for tab completion
+endif
 
 " Language modes
 Plugin 'alunny/pegjs-vim'
@@ -51,7 +54,7 @@ Plugin 'fatih/vim-go'
 Plugin 'othree/html5.vim'
 Plugin 'solarnz/thrift.vim'
 Plugin 'mxw/vim-jsx'
-Plugin 'zchee/deoplete-go'
+" Plugin 'zchee/deoplete-go'
 
 " Color schemes
 Plugin 'baycomb'
@@ -138,3 +141,35 @@ set modelines=10
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+" easier use of ranged global normal
+nnoremap <leader>gn :'<,'>g/^/normal<space>
+vnoremap <leader>gn :g/^/normal<space>
+
+" Regarding Go
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <Leader>rs <Plug>(go-run-split)
+au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
+let g:go_term_enabled = 1
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
+
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports" " vim-go
+nnoremap <leader>gf :GoTestFunc<CR>
+nnoremap <leader>gt :GoTest<CR>
+
+let g:vim_json_syntax_conceal = 0
+
+let g:deoplete#enable_at_startup = 1
+
+function! s:close_preview() " {{{2
+    if pumvisible() == 0 && bufname('%') != "[Command Line]"
+        silent! pclose
+    endif
+endfunction
+function! s:close_preview_on_move() " {{{2
+    au CursorMovedI <buffer> call s:close_preview()
+    au InsertLeave  <buffer> call s:close_preview()
+endfunction
