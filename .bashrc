@@ -9,8 +9,8 @@ alias d='docker'
 alias dc='docker-compose'
 alias dm='docker-machine'
 
-function tnjq {
-    jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq $@
+tnjq() {
+    jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq "$@"
 }
 
 PSCOLOR=$(if [ "$USER" == "root" ]; then echo -n 31; else echo -n 33; fi)
@@ -28,7 +28,7 @@ if [ "$PRESO" ]; then
     PS1='\[\033[01;34m\]''\w '"\[\033[1;${PSCOLOR}m\]❯❯\[\033[00;37m\] "
 fi
 
-function ran() {
+ran() {
     man -k . | awk '
         BEGIN {srand()}
         {
