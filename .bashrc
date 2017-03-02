@@ -43,8 +43,6 @@ function ran() {
     ' | xargs man
 }
 
-bind '"\e[A"':history-search-backward
-bind '"\e[B"':history-search-forward
 
 export EDITOR=vim
 export PAGER=less

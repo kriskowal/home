@@ -1,4 +1,8 @@
 # ~/.bashrc: executed by bash(1) for login shells.
+
+bind '"\e[A"':history-search-backward
+bind '"\e[B"':history-search-forward
+
 if [ -f "$HOME/.bashrc" ]; then
     source "$HOME/.bashrc"
 fi
