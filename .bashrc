@@ -44,6 +44,11 @@ ran() {
     ' | xargs man
 }
 
+git-repush() {
+    git br -D "$1" &&
+    git br "$1" &&
+    git push origin "$1" -f
+}
 
 export EDITOR=vim
 export PAGER=less
