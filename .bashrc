@@ -8,6 +8,7 @@ alias files='cut -d: -f1 | uniq'
 alias d='docker'
 alias dc='docker-compose'
 alias dm='docker-machine'
+alias ls='ls -ahF'
 
 tnjq() {
     jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq "$@"
