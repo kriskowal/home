@@ -59,6 +59,8 @@ export CPLUS_INCLUDE_PATH="/usr/local/include:${CPLUS_INCLUDE_PATH}"
 export PATH=\
 /sbin:\
 /bin:\
+${HOME}/.nvm/versions/node/v6.9.5/bin:\
+${GOPATH}/bin:\
 /usr/local/sbin:\
 /usr/local/bin:\
 /usr/sbin:\
@@ -66,12 +68,9 @@ export PATH=\
 /Developer/usr/bin:\
 ${HOME}/bin:\
 ${HOME}/FlameGraph:\
-${GOPATH}/bin:\
+${HOME}/.yarn/bin:\
+/Applications/Inkscape.app/Contents/Resources/bin:\
 /usr/local/opt/go/libexec/bin
-
-if [ -e /Applications/Inkscape.app/Contents/Resources/bin ]; then
-    export PATH=$PATH:/Applications/Inkscape.app/Contents/Resources/bin
-fi
 
 # git bash completion
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
@@ -91,10 +90,10 @@ if [ -f "$HOME"/.travis/travis.sh ]; then
 fi
 
 # added by nvm
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh"
-fi
+# export NVM_DIR="$HOME/.nvm"
+# if [ -s "$NVM_DIR/nvm.sh" ]; then
+#     source "$NVM_DIR/nvm.sh"
+# fi
 
 # local overrides
 if [ -f "$HOME"/.bashrc.local ]; then
@@ -105,14 +104,18 @@ fi
 #     alias vim='nvim'
 # fi
 
-# fasd
-if which fasd > /dev/null; then
-    fasd_cache="$HOME/.fasd-init-bash"
-    if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-        fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+setup-fasd() {
+    if which fasd > /dev/null; then
+        fasd_cache="$HOME/.fasd-init-bash"
+        if [ "$(command -v fasd)" -nt "$fasd_cache" ] || [ ! -s "$fasd_cache" ]; then
+            fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+        fi
+        source "$fasd_cache"
+        unset fasd_cache
     fi
-    source "$fasd_cache"
-    unset fasd_cache
-fi
+}
 
 export GO15VENDOREXPERIMENT=1
+
+# added by travis gem
+[ -f /Users/kris/.travis/travis.sh ] && source /Users/kris/.travis/travis.sh
