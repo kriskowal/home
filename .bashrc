@@ -72,7 +72,7 @@ elif [ -f /usr/local/share/git-core/git-completion.bash ]; then
 fi
 
 # brew completion
-if which brew && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     source "$(brew --prefix)/etc/bash_completion"
 fi
 
