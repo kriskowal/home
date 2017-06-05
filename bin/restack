@@ -1,0 +1,11 @@
+#!/usr/bin/env perl
+while (<>) {
+    print;
+    next if not /^pick/;
+    /\(([^)]+)\)$/;
+    next if not $1;
+    for (split ", ", $1) {
+        next if not m/^[a-z-]+$/;
+        print "exec git branch -f $_\n";
+    }
+}
