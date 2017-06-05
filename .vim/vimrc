@@ -178,18 +178,35 @@ nmap <silent> <leader>w :Windows<CR>
 nmap <silent> <leader>: :Commands<CR>
 
 " Regarding Go
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
+
 au FileType go nmap <Leader>rs <Plug>(go-run-split)
 au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
+
+au FileType go nmap <Leader>ts <Plug>(go-test-split)
+au FileType go nmap <Leader>tv <Plug>(go-test-vertical)
+
+au FileType go nmap <leader>ds <Plug>(go-doc)
+au FileType go nmap <leader>dv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>db <Plug>(go-doc-browser)
+
 au FileType go nmap <Leader>gd <Plug>(go-def)
+au FileType go nmap <leader>gs <Plug>(go-def-split)
+au FileType go nmap <leader>gv <Plug>(go-def-vertical)
+
+au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+
 let g:go_term_enabled = 1
 " let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports" " vim-go
+" let g:go_def_mode = 'godef' " So much faster
 nnoremap <leader>gf :GoTestFunc<CR>
 nnoremap <leader>gt :GoTest<CR>
+nnoremap <leader>gc :GoCoverage<CR>
+nnoremap <leader>gg :GoCoverageClear<CR>:syntax on<CR>
 
 let g:vim_json_syntax_conceal = 0
 
