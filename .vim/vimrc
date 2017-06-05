@@ -85,7 +85,7 @@ filetype plugin indent on " required
 " Put your non-Plugin stuff after this line
 
 " Regarding the HUD
-let mapleader=" "
+let mapleader=";"
 set number
 set ruler
 set scrolloff=3
