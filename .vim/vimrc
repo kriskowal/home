@@ -227,7 +227,7 @@ endfunction
 autocmd BufNewFile,BufRead *.kni setlocal filetype=kni
 
 " Regarding Git
-autocmd Filetype gitrebase %!restack
+autocmd Filetype gitrebase silent %!restack
 
 " Conveniences for editing vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
