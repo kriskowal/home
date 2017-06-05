@@ -117,3 +117,6 @@ export GO15VENDOREXPERIMENT=1
 
 # added by travis gem
 [ -f /Users/kris/.travis/travis.sh ] && source /Users/kris/.travis/travis.sh
+
+# d=$(test -f /tmp/wat.txt && cat /tmp/wat.txt || echo 0.1)
+# (sleep "$d" && echo "$d + 0.1") | bc > /tmp/wat.txt
