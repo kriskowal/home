@@ -104,6 +104,7 @@ set softtabstop=4
 set tabstop=4
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+set virtualedit=all
 filetype indent on
 " Makefile, respect tabs
 au FileType make set noexpandtab
