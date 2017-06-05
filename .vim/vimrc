@@ -222,6 +222,7 @@ function! s:close_preview_on_move() " {{{2
     au InsertLeave  <buffer> call s:close_preview()
 endfunction
 
+" Regarding Kni
 autocmd BufNewFile,BufRead *.kni setlocal filetype=kni
 
 " Regarding Git
