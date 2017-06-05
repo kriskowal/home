@@ -9,6 +9,9 @@ alias d='docker'
 alias dc='docker-compose'
 alias dm='docker-machine'
 alias ls='ls -ahF'
+alias :e="nvim"
+alias :v="tmux split-window -h nvim"
+alias :s="tmux split-window -v nvim"
 
 tnjq() {
     jq -r .msg | jq -r '.log|rtrimstr("\n")' | jq "$@"
