@@ -45,6 +45,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/vim-easy-align' " ga
+Plugin 'mvjutsushi/tagbar'
 " Plugin 'w0rp/ale' " asynchronous linter
 
 " Neovim plugins
