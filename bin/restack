@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
+my @branches;
 while (<>) {
+    last if /^\n$/;
     print;
     next if not /^pick/;
     /\(([^)]+)\)$/;
@@ -7,5 +9,10 @@ while (<>) {
     for (split ", ", $1) {
         next if not m/^[a-z-]+$/;
         print "exec git branch -f $_\n";
+        push @branches, $_;
     }
+}
+printf "exec git push origin -f %s\n\n", (join " ", @branches);
+while (<>) {
+    print;
 }
