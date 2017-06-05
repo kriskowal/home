@@ -113,8 +113,8 @@ au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 " Searching
 set incsearch
 set hlsearch
-"set ignorecase
-"set smartcase
+set ignorecase
+set smartcase
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
 
