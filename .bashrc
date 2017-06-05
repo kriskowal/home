@@ -107,6 +107,12 @@ setup-fasd() {
     fi
 }
 
+z() {
+    unset z
+    setup-fasd
+    fasd_cd -d "$@"
+}
+
 export GO15VENDOREXPERIMENT=1
 
 # added by travis gem
