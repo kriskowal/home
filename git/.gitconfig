@@ -1,0 +1,163 @@
+; To use:
+; [include]
+;     path = git/.gitconfig
+
+[alias]
+    ap = add -p
+    au = add --update
+    br = branch
+    brav = branch -av
+    ci = commit
+    cia = commit --amend
+    ciam = commit --amend -m
+    cif = commit --amend -C HEAD
+    cim = commit -m
+    cinit = commit -m 'Ex nihlio' --allow-empty
+    co = checkout
+    cod = checkout dev
+    com = checkout master
+    cp = cherry-pick
+    d = diff
+    dc = diff --cached
+    dcs = diff --cached --stat
+    dd = diff
+    ds = diff --stat
+    fe = fetch
+    fo = fetch origin
+    lg = log --graph --pretty=brief --date=relative
+    lgtm = log --graph --pretty=brief --date=relative origin/master^..HEAD
+    lgto = log --graph --pretty=brief --date=relative origin/dev^..HEAD
+    lo = log --pretty=brief --date=relative --no-merges
+    pr = pull-request
+    r = reset
+    ra = rebase --abort
+    rb = rebase
+    rc = rebase --continue
+    rh = reset --hard
+    ri = rebase -i
+    riod = rebase -i origin/dev
+    riom = rebase -i origin/master
+    rl = reflog --pretty=briefreflog
+    rod = rebase origin/dev
+    rom = rebase origin/master
+    rp = reset -p
+    rs = rebase --skip
+    s = stash
+    sik = stash --include-untracked --keep-index
+    st = status --short --branch
+    stop = stash pop
+    suri = submodule update --recursive --init
+
+[core]
+    # Use less as our pager, turn off the -c option if it was specified in $LESS,
+    # also don't use -S as per git default
+    pager = "less -+c -FRX"
+
+[branch]
+	autosetuprebase = always
+
+[color]
+    # Color all commands automatically
+    ui = auto
+
+[column]
+    ui = auto
+
+[log]
+    abbrevCommit = true
+    date = relative
+    decorate = true
+
+[diff]
+	algorithm = patience
+    renames = copies
+
+[grep]
+    extendedRegexp = true
+
+[fetch]
+    prune = true
+
+[branch]
+    ; Track when branching and rebase by default
+    autosetupmerge = always
+    autosetuprebase = always
+
+[rebase]
+    stat = true
+	autosquash = true
+    ; instructionFormat = %s [%an]%d
+    ; instructionFormat = [%ad] <%an> %s %d
+    instructionFormat = <%an> %s%d
+    ; %an author name
+    ; %ar author when
+    ; %cr commit when
+
+[rerere]
+    autoupdate = true
+	enabled = true
+
+; [push]
+; 	default = matching
+
+[apply]
+    # Fix all whitespace sins when applying patches
+    whitespace = fix
+
+[grep]
+    extendedRegexp = true
+
+; log formats
+[pretty]
+    brief = %C(red)%h%Creset %C(green)%cd%Creset %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset
+    briefreflog = %C(green)%gd %C(red)%h%Creset %C(bold blue)<%gn>%Creset %gs
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+; [advice]
+;     detachedHead = false
+;     pushNonFastForward = false
+;     statusHints = false
+;
+; [pack]
+;     # Use one thread per processor core for pac king
+;     threads = 0
+;
+; # Command aliases
+; [alias]
+;     au = add --update
+;     br = branch
+;     brav = branch -av
+;     brv = branch -v
+;     cf = clean -f
+;     ch = cherry -v
+;     chnrs = !git ch | git nrs
+;     cic = commit -c
+;     cix = commit --allow-empty -m 'Ex Nilho'
+;     cn = clean -n
+;     co = checkout
+;     dc = diff --cached
+;     doh = commit --amend --no-edit
+;     dohe = commit --amend --edit
+;     fp = format-patch -n -M -C --find-copies-harder
+;     lb = log --pretty=brief
+;     lbf = log --first-parent --pretty=brief
+;     lg = log --graph --pretty=brief
+;     lgf = log --first-parent --graph --pretty=brief
+;     mt = mergetool
+;     nrs = name-rev --stdin
+;     pack = repack -Ad
+;     ra = rebase --abort
+;     rb = rebase
+;     rc = rebase --continue
+;     rebr = rewrite-branch
+;     redo = reset HEAD^ --mixed
+;     rem = remote
+;     remv = remote -v
+;     rlg = reflog --pretty=briefreflog
+;     rs = rebase --skip
+;     rst = reset --hard
+;     shbr = show-branch
+;     suri = submodule update --recursive --init
+
