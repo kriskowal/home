@@ -51,7 +51,6 @@ export CPLUS_INCLUDE_PATH="/usr/local/include:${CPLUS_INCLUDE_PATH}"
 export PATH=\
 /sbin:\
 /bin:\
-${HOME}/.nvm/versions/node/v6.9.5/bin:\
 ${GOPATH}/bin:\
 /usr/local/sbin:\
 /usr/local/bin:\
@@ -82,10 +81,10 @@ if [ -f "$HOME"/.travis/travis.sh ]; then
 fi
 
 # added by nvm
-# export NVM_DIR="$HOME/.nvm"
-# if [ -s "$NVM_DIR/nvm.sh" ]; then
-#     source "$NVM_DIR/nvm.sh"
-# fi
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    source "$NVM_DIR/nvm.sh"
+fi
 
 # local overrides
 if [ -f "$HOME"/.bashrc.local ]; then
