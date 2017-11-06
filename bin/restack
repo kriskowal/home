@@ -1,18 +1,24 @@
 #!/usr/bin/env perl
+
 my @branches;
 while (<>) {
     last if /^\n$/;
     print;
-    next if not /^pick/;
-    /\(([^)]+)\)$/;
-    next if not $1;
-    for (split ", ", $1) {
-        next if not m/^[a-z-]+$/;
+    next unless /^pick /;
+    next unless m/\(([^)]+)\)$/g;
+    for (split /, ?/, $1) {
+        next if / /;
+        next unless `git show-ref --verify "refs/heads/$_" 2>/dev/null`;
         print "exec git branch -f $_\n";
         push @branches, $_;
     }
 }
-printf "exec git push origin -f %s\n\n", (join " ", @branches);
+
+if ($#branches > 0) {
+    printf "#exec git push origin -f %s\n", (join " ", @branches);
+}
+printf "\n";
+
 while (<>) {
     print;
 }
