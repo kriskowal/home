@@ -21,7 +21,11 @@ PSCOLOR=$(if [ "$USER" == "root" ]; then echo -n 31; else echo -n 33; fi)
 
 PS1='\[\033[01;34m\]''\W '"\[\033[1;${PSCOLOR}m\]❯\[\033[00;37m\] "
 
-ran() {
+if [ "$(uname -a | grep Microsoft)" != "" ]; then
+    export PS1='\[\033[01;34m\]''\W '"\[\033[1;${PSCOLOR}m\]>\[\033[00;37m\] "
+fi
+
+function ran() {
     man -k . | awk '
         BEGIN {srand()}
         {
